@@ -4,25 +4,29 @@ set nocompatible                                                "去掉vi的一�
 
 " ======================================== vundle 环境设置 =======================================
 filetype off
+" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 "vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
-
 "alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-call vundle#begin()
+" let Vundle manage Vundle, required
+" Plugin 'gmarik/Vundle.vim'
 Plugin 'VundleVim/Vundle.vim'
+
+" Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
+
 Plugin 'Valloric/YouCompleteMe'                                             " 自动补全
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
 Plugin 'vim-scripts/phd'
-Plugin 'Lokaltog/vim-powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'Lokaltog/vim-powerline', {'rtp': 'powerline/bindings/vim/'}         " Powerline状态栏
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'Raimondi/delimitMate'
-Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'                                                 " git集成
 Plugin 'vim-scripts/taglist.vim'
-Plugin 'vim-scripts/indentpython.vim'
+Plugin 'vim-scripts/indentpython.vim'                                       " python自动缩进
 " Plugin 'python-syntax/syntax'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'scrooloose/nerdtree'                                                " 文件树
@@ -33,25 +37,51 @@ Plugin 'ctrlpvim/ctrlp.vim'                                                 " �
 Plugin 'skammer/vim-css-color'
 Plugin 'pangloss/vim-javascript'
 Plugin 'isRuslan/vim-es6'
+Plugin 'scrooloose/syntastic'                                               " 语法检查
+Plugin 'nvie/vim-flake8'                                                    " PEP8代码风格检查
 Plugin 'joestelmach/lint.vim'
 Plugin 'tmhedberg/SimpylFold'
 Bundle 'davidhalter/jedi-vim'
-call vundle#end()                                                           " 插件列表结束
+" 配色方案
+" Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+" Plugin 'yuttie/hydrangea-vim'                 " 紫色
+" Plugin 'liuchengxu/space-vim-theme'
+" Plugin 'whatyouhide/vim-gotham'
+Plugin 'jpo/vim-railscasts-theme'
 
+" All of your Plugins must be added before the following line
+
+call vundle#end()                                                           " 插件列表结束
 filetype plugin indent on
 
+
+" YCM
 "let g:ycm_server_python_interpreter='/usr/bin/python3'
 "let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-" NERDTree 隐藏pyc文件
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-" 确保了在你完成操作之后，自动补全窗口不会消失
-let g:ycm_autoclose_preview_window_after_completion=1
-" 转到定义 的快捷方式
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
-" 看到折叠代码中的描述
-let g:SimpylFold_docstring_preview=1
-" 打开python 全部语法高亮
-let python_highlight_all = 1
+let g:ycm_autoclose_preview_window_after_completion=1                       " 确保了在你完成操作之后，自动补全窗口不会消失
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>              " 转到定义 的快捷方式
+
+" NERDTree 
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree              " 隐藏pyc文件
+" 在目录树中显示 git 状态
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "✹",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "✭",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ "Unknown"   : "?"
+    \ }
+
+" SimpylFold
+let g:SimpylFold_docstring_preview=1                                        " 看到折叠代码中的描述
+
+" vim-cpp-enhanced-highlight
+let python_highlight_all = 1                                                " 打开python 全部语法高亮
 
 "crtlP配置
 "let g:ctrlp_map = '<C-p>'
@@ -68,17 +98,6 @@ let g:ctrlp_max_height=15
 let g:ctrlp_match_window_reversed=0
 let g:ctrlp_mruf_max=500
 let g:ctrlp_follow_symlinks=1
-
-" 支持Virtualenv虚拟环境
-"py << EOF
-"import os
-"import sys
-"if 'VIRTUAL_ENV' in os.environ:
-"  project_base_dir = os.environ['VIRTUAL_ENV']
-"  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-"  execfile(activate_this, dict(__file__=activate_this))
-"EOF
-
 " ========================================     显示相关     ========================================
 set number                      " 显示行号"
 
@@ -89,26 +108,33 @@ set guioptions-=b
 
 " 隐藏顶部标签栏"
 set showtabline=0
-
 " 设置字体"
 set guifont=Monaco:h13
+
 " 设置主题颜色
 let g:solarized_termcolors=256  " solarized主题设置在终端下的设置"
-set background=dark             " 设置背景色"
-" colorscheme solarized           " 主题颜色
+" set background=dark           " 设置背景色"
+" colorscheme solarized
 " colorscheme molokai
-colorscheme delek
+" colorscheme delek
+" colorscheme zenburn
 " colorscheme phd
+" colorscheme hydrangea
+" colorscheme space_vim_theme
+" colorscheme railscasts        " 此主题在win cmd下可用
 
 if has('gui_running')
     set background=light
+    colorscheme delek
 else
     set background=dark
+    colorscheme solarized
 endif
 
-call togglebg#map("<F4>")
+call togglebg#map("<F4>")       " 切换主题功能(F4),轻色调/暗色调
 
 syntax on                       " 开启语法高亮
+syntax enable                   " 开启语法高亮
 
 set nowrap                      " 设置不折行"
 set showcmd                     " 输入的命令显示出来
@@ -120,6 +146,7 @@ set shiftwidth=4                " 同上"
 set softtabstop=4
 set autoindent                  " 开启自动缩进，保持缩进值与上一行相等
 set smartindent                 " 智能缩进
+set fileformat=unix             " 以unix格式储存文件
 
 set showmatch                   " 显示匹配的括号"
 set scrolloff=5                 " 距离顶部和底部5行"
@@ -162,26 +189,53 @@ set fenc=utf-8                  " 文件编码
 set fencs=utf-8,usc-bom,euc-jp,gb18030,gbk,gb2312,cp936,big-5
 set enc=utf-8
 let &termencoding=&encoding
-
-"共享剪切板
-set clipboard=unnamed
+set clipboard=unnamed           "共享系统剪切板
 
 " ========================================    自定义键映射   ========================================
 "设置键盘映射，通过空格设置折叠
 nnoremap <space> @=((foldclosed(line('.')<0)?'zc':'zo'))<CR>
+
 " 实现CTRL-w保存操作
 nnoremap <C-w> :w<cr>
 imap <C-w> <Esc>:w<cr>i
+
 "映射以Ｆ5打开NERDTree
 nnoremap <silent> <F5> :NERDTree<CR>
+
 "映射自动补全括号
 inoremap ( ()<ESC>i
 inoremap [ []<ESC>i
 inoremap { {}<ESC>i
 " inoremap " ""<ESC>i
 " inoremap ' ''<ESC>i
+
 " 分割窗口切换快捷键
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+
+" =========================================   不同语言设置   ==========================================
+" 支持Virtualenv虚拟环境
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix |
+
+au BufNewFile,BufRead *.js,*.html,*.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2 |
