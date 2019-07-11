@@ -5,6 +5,8 @@ set nocompatible                                                "去掉vi的一�
 " ======================================== vundle 环境设置 =======================================
 filetype off
 " set the runtime path to include Vundle and initialize
+" 首先安装 Vundle
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -27,16 +29,15 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'                                                 " git集成
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/indentpython.vim'                                       " python自动缩进
-" Plugin 'python-syntax/syntax'
+Plugin 'python-syntax/syntax'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'scrooloose/nerdtree'                                                " 文件树
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'vim-airline/vim-airline'
-" Plugin 'kien/ctrlp.vim'
 Plugin 'ctrlpvim/ctrlp.vim'                                                 " 超级搜索
 Plugin 'skammer/vim-css-color'
 Plugin 'pangloss/vim-javascript'
 Plugin 'isRuslan/vim-es6'
+Plugin 'scrooloose/nerdtree'                                                " 文件树
 Plugin 'scrooloose/syntastic'                                               " 语法检查
 Plugin 'nvie/vim-flake8'                                                    " PEP8代码风格检查
 Plugin 'joestelmach/lint.vim'
