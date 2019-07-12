@@ -66,15 +66,36 @@ let g:ycm_confirm_extra_conf=0                                              " �
 set completeopt=longest,menu
 let g:ycm_server_python_interpreter='~/.pyenv/shims/python'                 " python解释器路径
 let g:ycm_seed_identifiers_with_syntax=1                                    " 是否开启语义补全"
+let g:ycm_collect_identifiers_from_tags_files = 1                           " 开启 YCM 基于标签引擎
 let g:ycm_complete_in_comments=1                                            " 是否在注释中也开启补全"
-let g:ycm_collect_identifiers_from_comments_and_strings = 0
-let g:ycm_min_num_of_chars_for_completion=2                                 " 开始补全的字符数
-let g:ycm_autoclose_preview_window_after_completion=1                       " 补全后自动关机预览窗口"
-let g:ycm_cache_omnifunc=0                                                  " 禁止缓存匹配项,每次都重新生成匹配项"
 let g:ycm_complete_in_strings = 1                                           " 字符串中也开启补全"
+let g:ycm_collect_identifiers_from_comments_and_strings = 0                 " 注释和字符串中的文字也会被收入补全
+let g:ycm_min_num_of_chars_for_completion=2                                 " 从第2个键入字符就开始罗列匹配项
+let g:ycm_autoclose_preview_window_after_completion=1                       " 补全后自动关机预览窗口"
+let g:ycm_add_preview_to_completeopt = 0                                    " 关闭函数原型提示
+let g:ycm_cache_omnifunc=0                                                  " 禁止缓存匹配项,每次都重新生成匹配项"
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif                     " 离开插入模式后自动关闭预览窗口"
-" inoremap <expr> <CR> pumvisible() ? '<C-y>':'\<CR>'                       " 回车即选中当前项"
+
+" inoremap <expr> <CR> pumvisible() ? '<C-y>':'\<CR>'                       " 回车即选中当前项
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']                  " 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']                  " 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
+" let g:ycm_key_invoke_completion = ['<C-Space>']                           " 主动补全, 默认为<C-Space>
+" let g:ycm_key_list_stop_completion = ['<C-y>']                            " 停止显示补全列表, 可以按<C-Space>重新弹出
+nnoremap <c-k> :YcmCompleter GoToDeclaration<CR>|
+nnoremap <c-h> :YcmCompleter GoToDefinition<CR>|
+nnoremap <c-j> :YcmCompleter GoToDefinitionElseDeclaration<CR>|
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>              " 转到定义 的快捷方式
+
+let g:ycm_filetype_whitelist = { 
+    \ "c":1,
+    \ "cpp":1, 
+    \ "objc":1,
+    \ "sh":1,
+    \ "zsh":1,
+    \ "python":1,
+    \ "lua":1,
+    \ }
+
 
 " NERDTree
 nnoremap <silent> <F2> :NERDTree<CR>                                        " 映射以Ｆ2打开NERDTree
