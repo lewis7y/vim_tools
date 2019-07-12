@@ -39,10 +39,12 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'isRuslan/vim-es6'
 Plugin 'scrooloose/nerdtree'                                                " 文件树
 Plugin 'scrooloose/syntastic'                                               " 语法检查
+Plugin 'scrooloose/nerdcommenter'                                           " 多行注释
 Plugin 'nvie/vim-flake8'                                                    " PEP8代码风格检查
 Plugin 'joestelmach/lint.vim'
 Plugin 'tmhedberg/SimpylFold'
 Bundle 'davidhalter/jedi-vim'
+Plugin 'Yggdroot/indentLine'                                                " 缩进指示线
 " 配色方案
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
@@ -59,13 +61,27 @@ filetype plugin indent on
 
 
 " YCM
-"let g:ycm_server_python_interpreter='/usr/bin/python3'
-"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
-let g:ycm_autoclose_preview_window_after_completion=1                       " 确保了在你完成操作之后，自动补全窗口不会消失
+"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'                " 默认配置文件路径
+let g:ycm_confirm_extra_conf=0                                              " 打开vim时不再询问是否加载ycm_extra_conf.py配置
+set completeopt=longest,menu
+"let g:ycm_server_python_interpreter='~/.pyenv/shims/python'                " python解释器路径
+let g:ycm_seed_identifiers_with_syntax=1                                    " 是否开启语义补全"
+let g:ycm_complete_in_comments=1                                            " 是否在注释中也开启补全"
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+let g:ycm_min_num_of_chars_for_completion=2                                 " 开始补全的字符数
+let g:ycm_autoclose_preview_window_after_completion=1                       " 补全后自动关机预览窗口"
+let g:ycm_cache_omnifunc=0                                                  " 禁止缓存匹配项,每次都重新生成匹配项"
+let g:ycm_complete_in_strings = 1                                           " 字符串中也开启补全"
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif                     " 离开插入模式后自动关闭预览窗口"
+inoremap <expr> <CR>       pumvisible() ? '<C-y>' : '\<CR>'                 " 回车即选中当前项"
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>              " 转到定义 的快捷方式
 
-" NERDTree 
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree              " 隐藏pyc文件
+" NERDTree
+nnoremap <silent> <F2> :NERDTree<CR>                                        " 映射以Ｆ2打开NERDTree
+let NERDTreeChDirMode=1
+let NERDTreeShowBookmarks=1                                                 " 显示书签"
+let NERDTreeIgnore=['\.pyc$', '\~$']                                        " ignore files in NERDTree
+let NERDTreeWinSize=25                                                      " 窗口大小"
 " 在目录树中显示 git 状态
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✹",
@@ -78,6 +94,10 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+
+" Yggdroot/indentLine
+let g:indentLine_char='┆'                                                   " 缩进指示线
+let g:indentLine_enabled = 1                                                " 开启展示
 
 " SimpylFold
 let g:SimpylFold_docstring_preview=1                                        " 看到折叠代码中的描述
@@ -134,7 +154,7 @@ else
     colorscheme dracula
 endif
 
-call togglebg#map("<F4>")       " 切换主题功能(F4),轻色调/暗色调
+call togglebg#map("<F12>")       " 切换主题功能(F12),轻色调/暗色调
 
 syntax on                       " 开启语法高亮
 syntax enable                   " 开启语法高亮
@@ -201,9 +221,6 @@ nnoremap <space> @=((foldclosed(line('.')<0)?'zc':'zo'))<CR>
 " 实现CTRL-w保存操作
 nnoremap <C-w> :w<cr>
 imap <C-w> <Esc>:w<cr>i
-
-"映射以Ｆ5打开NERDTree
-nnoremap <silent> <F5> :NERDTree<CR>
 
 "映射自动补全括号
 inoremap ( ()<ESC>i
