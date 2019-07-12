@@ -73,7 +73,7 @@ let g:ycm_autoclose_preview_window_after_completion=1                       " �
 let g:ycm_cache_omnifunc=0                                                  " 禁止缓存匹配项,每次都重新生成匹配项"
 let g:ycm_complete_in_strings = 1                                           " 字符串中也开启补全"
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif                     " 离开插入模式后自动关闭预览窗口"
-inoremap <expr> <CR>       pumvisible() ? '<C-y>' : '\<CR>'                 " 回车即选中当前项"
+" inoremap <expr> <CR> pumvisible() ? '<C-y>':'\<CR>'                       " 回车即选中当前项"
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>              " 转到定义 的快捷方式
 
 " NERDTree
@@ -98,6 +98,8 @@ let g:NERDTreeIndicatorMapCustom = {
 " Yggdroot/indentLine
 let g:indentLine_char='┆'                                                   " 缩进指示线
 let g:indentLine_enabled = 1                                                " 开启展示
+
+let g:NERDSpaceDelims=1                                                     " 注释的时候自动加个空格
 
 " SimpylFold
 let g:SimpylFold_docstring_preview=1                                        " 看到折叠代码中的描述
