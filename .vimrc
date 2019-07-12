@@ -61,10 +61,10 @@ filetype plugin indent on
 
 
 " YCM
-"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'                " 默认配置文件路径
+let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'                 " 默认配置文件路径
 let g:ycm_confirm_extra_conf=0                                              " 打开vim时不再询问是否加载ycm_extra_conf.py配置
 set completeopt=longest,menu
-"let g:ycm_server_python_interpreter='~/.pyenv/shims/python'                " python解释器路径
+let g:ycm_server_python_interpreter='~/.pyenv/shims/python'                 " python解释器路径
 let g:ycm_seed_identifiers_with_syntax=1                                    " 是否开启语义补全"
 let g:ycm_complete_in_comments=1                                            " 是否在注释中也开启补全"
 let g:ycm_collect_identifiers_from_comments_and_strings = 0
