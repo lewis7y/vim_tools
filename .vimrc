@@ -5,6 +5,8 @@ set nocompatible                                                "去掉vi的一�
 " ======================================== vundle 环境设置 =======================================
 filetype off
 " set the runtime path to include Vundle and initialize
+" 首先安装 Vundle
+" git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -27,28 +29,28 @@ Plugin 'Raimondi/delimitMate'
 Plugin 'tpope/vim-fugitive'                                                 " git集成
 Plugin 'vim-scripts/taglist.vim'
 Plugin 'vim-scripts/indentpython.vim'                                       " python自动缩进
-" Plugin 'python-syntax/syntax'
+Plugin 'python-syntax/syntax'
 Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'scrooloose/nerdtree'                                                " 文件树
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'vim-airline/vim-airline'
-" Plugin 'kien/ctrlp.vim'
 Plugin 'ctrlpvim/ctrlp.vim'                                                 " 超级搜索
 Plugin 'skammer/vim-css-color'
 Plugin 'pangloss/vim-javascript'
 Plugin 'isRuslan/vim-es6'
+Plugin 'scrooloose/nerdtree'                                                " 文件树
 Plugin 'scrooloose/syntastic'                                               " 语法检查
 Plugin 'nvie/vim-flake8'                                                    " PEP8代码风格检查
 Plugin 'joestelmach/lint.vim'
 Plugin 'tmhedberg/SimpylFold'
 Bundle 'davidhalter/jedi-vim'
 " 配色方案
-" Plugin 'jnurmine/Zenburn'
+Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
-" Plugin 'yuttie/hydrangea-vim'                 " 紫色
-" Plugin 'liuchengxu/space-vim-theme'
-" Plugin 'whatyouhide/vim-gotham'
+Plugin 'yuttie/hydrangea-vim'                 " 紫色
+Plugin 'liuchengxu/space-vim-theme'
+Plugin 'whatyouhide/vim-gotham'
 Plugin 'jpo/vim-railscasts-theme'
+Plugin 'dracula/vim'
 
 " All of your Plugins must be added before the following line
 
@@ -122,13 +124,14 @@ let g:solarized_termcolors=256  " solarized主题设置在终端下的设置"
 " colorscheme hydrangea
 " colorscheme space_vim_theme
 " colorscheme railscasts        " 此主题在win cmd下可用
+" colorscheme dracula
 
 if has('gui_running')
     set background=light
-    colorscheme delek
+    colorscheme dracula
 else
     set background=dark
-    colorscheme solarized
+    colorscheme dracula
 endif
 
 call togglebg#map("<F4>")       " 切换主题功能(F4),轻色调/暗色调
