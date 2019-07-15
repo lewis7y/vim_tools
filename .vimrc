@@ -117,8 +117,14 @@ let g:NERDTreeIndicatorMapCustom = {
     \ }
 
 " Yggdroot/indentLine
-let g:indentLine_char='┆'                                                   " 缩进指示线
 let g:indentLine_enabled = 1                                                " 开启展示
+let g:indentLine_concealcursor = 'inc'                                      " 隐藏光标所在行的文本
+let g:indentLine_conceallevel = 2                                           " 指定如何显示使用 
+let g:indentLine_setColors = 0                                              " 恢复使用配色方案中的颜色
+" let g:indentLine_color_term = 255                                         " 缩进线颜色
+let g:indentLine_char='¦'                                                   " 缩进指示线
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']                           " 不同缩进层级
+
 
 let g:NERDSpaceDelims=1                                                     " 注释的时候自动加个空格
 
