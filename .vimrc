@@ -76,7 +76,7 @@ let g:ycm_add_preview_to_completeopt = 0                                    " �
 let g:ycm_cache_omnifunc=0                                                  " 禁止缓存匹配项,每次都重新生成匹配项"
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif                     " 离开插入模式后自动关闭预览窗口"
 
-" inoremap <expr> <CR> pumvisible() ? '<C-y>':'\<CR>'                       " 回车即选中当前项
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>" |                    " 回车即选中当前项
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']                  " 弹出列表时选择第1项的快捷键(默认为<TAB>和<Down>)
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']                  " 弹出列表时选择前1项的快捷键(默认为<S-TAB>和<UP>)
 " let g:ycm_key_invoke_completion = ['<C-Space>']                           " 主动补全, 默认为<C-Space>
