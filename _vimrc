@@ -6,11 +6,13 @@ set nocompatible                                                "去掉vi的一�
 filetype off
 " set the runtime path to include Vundle and initialize
 " 首先安装 Vundle
-" 旧版
+" 旧版 待确认弃用
 " git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 " 新版
-" git clone https://github.com/VundleVim/Vundle.vim.git
-set rtp+=~/.vim/bundle/Vundle.vim
+" cd D:\Program Files\Vim
+" git clone https://github.com/VundleVim/Vundle.vim.git vimfiles\bundle\Vundle.vim
+" 事先在windown用户环境变量中添加 VIM: VIM PATH
+set rtp+=$VIM\vimfiles\bundle\Vundle.vim
 call vundle#begin()
 
 "vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
